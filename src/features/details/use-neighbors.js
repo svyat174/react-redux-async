@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { useEffect } from 'react';
-import { loadNeighboursByBorder, selectNeighbours } from './details-slice'
+import { loadNeighborsByBorder, selectNeighbors } from './details-slice';
 
 export const useNeighbors = (borders = []) => {
-  const dispatch = useDispatch()
-  const neighbors = useSelector(selectNeighbours)
-  
+  const dispatch = useDispatch();
+  const neighbors = useSelector(selectNeighbors);
+
   useEffect(() => {
     if (borders.length) {
-      dispatch(loadNeighboursByBorder(borders))
+      dispatch(loadNeighborsByBorder(borders));
     }
-  }, [borders, dispatch])
+  }, [borders, dispatch]);
 
   return neighbors;
 }

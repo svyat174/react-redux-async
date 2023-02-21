@@ -1,9 +1,10 @@
 import { Info } from './Info';
 import { useDetails } from './use-details';
 
-export const CountryDetails = ({ name = '', navigate }) => {
-  const {currentCountry, error, status} = useDetails(name)
-  
+
+const CountryDetails = ({name = '', navigate}) => {
+  const {status, error, currentCountry} = useDetails(name);
+
   return (
     <>
       {status === 'loading' && <h2>Loading...</h2>}
@@ -12,3 +13,5 @@ export const CountryDetails = ({ name = '', navigate }) => {
     </>
   )
 }
+
+export {CountryDetails};

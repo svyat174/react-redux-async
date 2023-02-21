@@ -102,8 +102,8 @@ export const Info = (props) => {
     borders = [],
     push,
   } = props;
-  
-  const neighbors = useNeighbors(borders)
+
+  const neighbors = useNeighbors(borders);
 
   return (
     <Wrapper>
@@ -156,9 +156,9 @@ export const Info = (props) => {
             <span>There is no border countries</span>
           ) : (
             <TagGroup>
-              {neighbors.map((b) => (
-                <Tag key={b} onClick={() => push(`/country/${b}`)}>
-                  {b}
+              {neighbors.map((countryName) => (
+                <Tag key={countryName} onClick={() => push(`/country/${countryName}`)}>
+                  {countryName}
                 </Tag>
               ))}
             </TagGroup>

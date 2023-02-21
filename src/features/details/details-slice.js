@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const loadCountryByName = createAsyncThunk(
   '@@details/load-country-by-name',
@@ -6,13 +6,12 @@ export const loadCountryByName = createAsyncThunk(
     return client.get(api.searchByCountry(name));
   }
 );
-
-export const loadNeighboursByBorder = createAsyncThunk(
+export const loadNeighborsByBorder = createAsyncThunk(
   '@@details/load-neighbors',
   (borders, {extra: {client, api}}) => {
-    return client.get(api.filterByCode(borders))
+    return client.get(api.filterByCode(borders));
   }
-)
+);
 
 const initialState = {
   currentCountry: null,
@@ -25,7 +24,7 @@ const detailsSlice = createSlice({
   name: '@@details',
   initialState,
   reducers: {
-    clearDetails: () => initialState
+    clearDetails: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -38,20 +37,20 @@ const detailsSlice = createSlice({
         state.error = action.payload || action.meta.error;
       })
       .addCase(loadCountryByName.fulfilled, (state, action) => {
-        state.status = 'received';
+        state.status = 'idle';
         state.currentCountry = action.payload.data[0];
       })
-      .addCase(loadNeighboursByBorder.fulfilled, (state, action) => {
-        state.neighbors = action.payload.data.map(country => country.name)
+      .addCase(loadNeighborsByBorder.fulfilled, (state, action) => {
+        state.neighbors = action.payload.data.map(country => country.name);
       })
   }
 });
 
-export const { clearDetails } = detailsSlice.actions
-export const detailsReducer = detailsSlice.reducer
+export const {clearDetails} = detailsSlice.actions;
+export const detailsReducer = detailsSlice.reducer;
 
-export const selectCurrentCountries = (state) => state.details.currentCountry;
 
+// selectors
+export const selectCurrentCountry = (state) => state.details.currentCountry;
 export const selectDetails = (state) => state.details;
-
-export const selectNeighbours = (state) => state.details.neighbours
+export const selectNeighbors = (state) => state.details.neighbors;
